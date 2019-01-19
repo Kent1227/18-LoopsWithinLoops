@@ -146,9 +146,24 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    ox = rectangle.get_upper_left_corner().x
+    y = rectangle.get_upper_left_corner().y
+
+    for k in range(n):
+        num = k + 1
+        x = ox
+        for _ in range(num):
+            p1 = rg.Point(x, y)
+            p2 = rg.Point(x + rectangle.get_width(), y + rectangle.get_height())
+            rect = rg.Rectangle(p1, p2)
+            rect.attach_to(window)
+            x = x - rectangle.get_width()
+        y = y + rectangle.get_height()
+
+    window.render()
 
 
 # ----------------------------------------------------------------------
