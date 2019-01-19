@@ -3,19 +3,19 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Kent Smith.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    run_test_draw_l()
     run_test_draw_wall_on_right()
 
 
-def run_test_draw_L():
+def run_test_draw_l():
     """
     Demonstrates nested loops in a TWO-DIMENSIONAL GRAPHICS example.
     """
@@ -38,7 +38,7 @@ def run_test_draw_L():
     green_circle = starting_circle.clone()
     green_circle.fill_color = 'green'
 
-    draw_L(window, green_circle, 10, 5)
+    draw_l(window, green_circle, 10, 5)
     window.continue_on_mouse_click('Click to run Test 2.')
 
     # ------------------------------------------------------------------
@@ -49,12 +49,12 @@ def run_test_draw_L():
     blue_circle.fill_color = 'blue'
 
     window.continue_on_mouse_click('Click to run Test 2.')
-    draw_L(window, blue_circle, 6, 15)
+    draw_l(window, blue_circle, 6, 15)
 
     window.close_on_mouse_click()
 
 
-def draw_L(window, circle, r, c):
+def draw_l(window, circle, r, c):
     """
     See   L.pdf   in this project for pictures that may
     help you better understand the following specification:
@@ -79,8 +79,33 @@ def draw_L(window, circle, r, c):
       :type c: int
     and m and n are small, positive integers.
     """
+    x = 0
+    d = 2 * circle.radius
+    ox = circle.center.x
+    y = circle.center.y
+    for _ in range(r + 3):
+        x = ox
+        for _ in range(3):
+            dcircle = rg.Circle(rg.Point(x, y), circle.radius)
+            dcircle.fill_color = circle.fill_color
+            dcircle.attach_to(window)
+            x = x + d
+        y = y + d
+    ox = x
+    y = y - d
+    for k in range(3):
+        x = ox
+        for _ in range(c):
+            dcircle = rg.Circle(rg.Point(x, y), circle.radius)
+            dcircle.fill_color = circle.fill_color
+            dcircle.attach_to(window)
+            x = x + d
+        y = y - d
+
+    window.render()
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
 
